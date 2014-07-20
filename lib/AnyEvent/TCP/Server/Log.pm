@@ -19,6 +19,7 @@ sub new {
 
     my $self = {};
 
+    $self->{hostname} = hostname();
     $self->{udp_socket} = new IO::Socket::INET(
         PeerAddr    =>  q{127.0.0.1:5140},
         Proto       =>  q{udp},
@@ -40,13 +41,13 @@ sub send_udp_log {
     return $self->{udp_socket}->send($logline);
 }
 
+# syslog line example
 # Jul 19 10:29:40 michael-Inspiron-7720 anacron[3118]: Job `cron.daily' terminated
-
 
 sub format_log {
     my ( $self, $logline ) = @_;
     my $date = strftime(q{%b %d %H:%M:%S}, localtime);
-    return sprintf q{%s %s %s[%d]: %s }, $date, hostname(), $0, $$, $logline;
+    return sprintf q{%s %s %s[%d]: %s }, $date, $self->{hostname}, $0, $$, $logline;
 }
 
 
