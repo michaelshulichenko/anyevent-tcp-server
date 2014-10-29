@@ -13,7 +13,7 @@ Also, I am not sure that it will work on FreeBSD 9 and Windows.
 
 Use Linux, Luke.
 
-## DESCRITPION
+## DESCRIPTION
 
 High perfomance pre-forking full-asynchronous tcp server. One restriction:
 you can't get client info inside process\_request subroutine.
